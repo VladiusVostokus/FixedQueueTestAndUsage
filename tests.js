@@ -126,15 +126,16 @@ const kSize = 2047;
     queue.push(i);
   }
   
-  assert.equal(queue.head.top, 5000 - kSize * 2);
+  const elemCount = kSize * 2;
+  assert.equal(queue.head.top, 5000 - elemCount);
 
   for (let i = 0; i < 4999; i++) {
     queue.shift();
   }
 
-  assert.equal(queue.tail.bottom, 5000 - kSize * 2 - 1);
+  assert.equal(queue.tail.bottom, 5000 - elemCount - 1);
   queue.shift();
-  assert.equal(queue.tail.bottom, 5000 - kSize * 2);
+  assert.equal(queue.tail.bottom, 5000 - elemCount);
 }
 
 
