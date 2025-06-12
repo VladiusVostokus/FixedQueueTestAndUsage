@@ -73,5 +73,24 @@ assert.equal(queue.head.bottom, 0);
 queue.push(12312);
 assert.equal(queue.head.top, 1);
 
+// Shift more than 2047
+queue = new FixedQueue();
+
+for (let i = 0; i < 2047; i++) {
+  queue.push(i);
+}
+
+queue.shift();
+assert.equal(queue.head.bottom, 1);
+
+for (let i = 0; i < 2046; i++) {
+  queue.shift();
+}
+
+assert.equal(queue.head.bottom, 2047);
+queue.shift();
+queue.shift();
+assert.equal(queue.head.bottom, 2047);
+
 
 
