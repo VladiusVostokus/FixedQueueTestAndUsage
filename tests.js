@@ -38,7 +38,7 @@ queue.push(testArr);
 assert.deepEqual(queue.shift(), expectedArray);
 
 
-// Bottom and top behaviour
+// Bottom and top behaviour if only 1 buffer
 queue = new FixedQueue();
 for (let i = 0; i < 10; i++) {
   queue.push(i);
@@ -68,7 +68,7 @@ for (let i = 0; i < 2047; i++) {
 }
 
 assert.equal(queue.head.top, 2047);
-assert.equal(queue.head.bottom, 0);
+assert.equal(queue.tail.bottom, 0);
 
 queue.push(12312);
 assert.equal(queue.head.top, 1);
@@ -83,7 +83,7 @@ for (let i = 0; i < 20; i++) {
   queue.shift();
 }
 
-assert.equal(queue.head.bottom, 10);
+assert.equal(queue.tail.bottom, 10);
 
 queue = new FixedQueue();
 
@@ -92,16 +92,16 @@ for (let i = 0; i < 2047; i++) {
 }
 
 queue.shift();
-assert.equal(queue.head.bottom, 1);
+assert.equal(queue.tail.bottom, 1);
 
 for (let i = 0; i < 2046; i++) {
   queue.shift();
 }
 
-assert.equal(queue.head.bottom, 2047);
+assert.equal(queue.tail.bottom, 2047);
 queue.shift();
 queue.shift();
-assert.equal(queue.head.bottom, 2047);
+assert.equal(queue.tail.bottom, 2047);
 
 // Top and Bottom if more than 1 FixedCircularBuffer
 queue = new FixedQueue();
@@ -116,7 +116,10 @@ for (let i = 0; i < 4999; i++) {
   queue.shift();
 }
 
-assert.equal(queue.head.bottom, 5000 - 2047 * 2 - 1);
+assert.equal(queue.tail.bottom, 5000 - 2047 * 2 - 1);
 queue.shift();
-assert.equal(queue.head.bottom, 5000 - 2047 * 2);
+assert.equal(queue.tail.bottom, 5000 - 2047 * 2);
+
+
+
 
