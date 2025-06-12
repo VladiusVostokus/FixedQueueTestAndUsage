@@ -42,7 +42,7 @@ const kSize = 2047;
   assert.deepEqual(queue.shift(), expectedArray);
 }
 
-  // Bottom and top behaviour if only 1 buffer
+  // Bottom and top behaviour if only 1 FixedCircularBuffers
 {
   const queue = new FixedQueue();
   for (let i = 0; i < 10; i++) {
@@ -67,7 +67,7 @@ const kSize = 2047;
   assert.equal(queue.head.bottom, 2);
 }
 
-// Add more than 2028(creation of new buffer inside queue)
+// Add more than 2028(creation of new FixedCircularBuffers inside queue)
 {
   const queue = new FixedQueue();
   for (let i = 0; i < kSize; i++) {
@@ -82,7 +82,7 @@ const kSize = 2047;
 }
 
 
-// Shift more than list len
+// Shift more than FixedCircularBuffers len
 {
   const queue = new FixedQueue();
   for (let i = 0; i < 10; i++) {
@@ -96,7 +96,7 @@ const kSize = 2047;
   assert.equal(queue.tail.bottom, 10);
 }
 
-// Shift more than list len, bigger list
+// Shift more than FixedCircularBuffers len, more elements
 {
   const queue = new FixedQueue();
 
@@ -118,7 +118,7 @@ const kSize = 2047;
 }
 
 
-// Top and Bottom if more than 1 FixedCircularBuffer
+// Top and Bottom if more than 1 FixedCircularBuffers
 {
   const queue = new FixedQueue();
 
@@ -139,7 +139,7 @@ const kSize = 2047;
 }
 
 
-// Bottom behaviour if buffer count increases
+// Bottom behaviour if FixedCircularBuffers count increases
 {
   const queue = new FixedQueue();
 
