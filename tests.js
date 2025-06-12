@@ -121,21 +121,26 @@ const kSize = 2047;
 // Top and Bottom behaviour if more than 1 FixedCircularBuffer
 {
   const queue = new FixedQueue();
+  const countToPush = 5000;
 
-  for (let i = 0; i < 5000; i++) {
+  for (let i = 0; i < countToPush; i++) {
     queue.push(i);
   }
   
-  const elemCount = kSize * 2;
+  const countOfFullBuffers = 2;
+  const elemCount = kSize * countOfFullBuffers;
   assert.equal(queue.head.top, 5000 - elemCount);
 
-  for (let i = 0; i < 4999; i++) {
+  const countToShift = countToPush - 1;
+  for (let i = 0; i < countToShift; i++) {
     queue.shift();
   }
 
-  assert.equal(queue.tail.bottom, 5000 - elemCount - 1);
+  const expectedBottom =  countToShift - elemCount;
+  
+  assert.equal(queue.tail.bottom, expectedBottom);
   queue.shift();
-  assert.equal(queue.tail.bottom, 5000 - elemCount);
+  assert.equal(queue.tail.bottom, expectedBottom + 1);
 }
 
 
