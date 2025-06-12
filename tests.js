@@ -19,3 +19,7 @@ assert.equal(queue.isEmpty(), true);
 // Should be null, because queue is empty
 assert.equal(queue.shift(), null);
 
+// Doesn't change pushed elements inside
+queue.push(2);
+assert.notEqual(queue.shift(), 3);
+
