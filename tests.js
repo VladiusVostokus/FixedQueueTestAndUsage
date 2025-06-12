@@ -16,5 +16,6 @@ assert.equal(queue.shift(), 3);
 
 assert.equal(queue.isEmpty(), true);
 
-
+// Should be null, because queue is empty
+assert.equal(queue.shift(), null);
 
