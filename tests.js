@@ -16,3 +16,13 @@ assert(queue.shift(), 3);
 
 assert(queue.isEmpty, true);
 
+// Example of full Queue
+
+while(!queue.head.isFull) {
+    queue.push(1);
+}
+assert(!queue.head.isFull, true);
+
+// Example of overflow
+queue.push(1);
+

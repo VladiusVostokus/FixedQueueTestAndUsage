@@ -1,9 +1,5 @@
 'use strict';
 
-const {
-  Array,
-  ArrayPrototypeFill,
-} = primordials;
 
 // Currently optimal queue size, tested on V8 6.0 - 6.6. Must be power of two.
 const kSize = 2048;
@@ -61,7 +57,7 @@ class FixedCircularBuffer {
   constructor() {
     this.bottom = 0;
     this.top = 0;
-    this.list = ArrayPrototypeFill(new Array(kSize), undefined);
+    this.list = new Array(kSize).fill(undefined); 
     this.next = null;
   }
 
