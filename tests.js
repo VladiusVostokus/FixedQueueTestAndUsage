@@ -103,5 +103,20 @@ queue.shift();
 queue.shift();
 assert.equal(queue.head.bottom, 2047);
 
+// Top and Bottom if more than 1 FixedCircularBuffer
+queue = new FixedQueue();
 
+for (let i = 0; i < 5000; i++) {
+  queue.push(i);
+}
+
+assert.equal(queue.head.top, 5000 - 2047 * 2);
+
+for (let i = 0; i < 4999; i++) {
+  queue.shift();
+}
+
+assert.equal(queue.head.bottom, 5000 - 2047 * 2 - 1);
+queue.shift();
+assert.equal(queue.head.bottom, 5000 - 2047 * 2);
 
