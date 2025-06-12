@@ -120,6 +120,23 @@ assert.equal(queue.tail.bottom, 5000 - 2047 * 2 - 1);
 queue.shift();
 assert.equal(queue.tail.bottom, 5000 - 2047 * 2);
 
+// Bottom behaciour if buffer count increases
+queue = new FixedQueue();
 
+for (let i = 0; i < 1000; i++) {
+  queue.push(i);
+}
+
+for (let i = 0; i < 500; i++) {
+  queue.shift();
+}
+assert.equal(queue.tail.bottom, 500);
+assert.equal(queue.head.bottom, 500);
+
+for (let i = 0; i < 2000; i++) {
+  queue.push(i);
+}
+assert.equal(queue.tail.bottom, 500);
+assert.equal(queue.head.bottom, 0);
 
 
