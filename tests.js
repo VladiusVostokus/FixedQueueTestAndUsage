@@ -38,4 +38,29 @@ queue.push(testArr);
 assert.deepEqual(queue.shift(), expectedArray);
 
 
+// Bottom and top behaviour
+queue = new FixedQueue();
+for (let i = 0; i < 10; i++) {
+  queue.push(i);
+}
+
+assert.equal(queue.head.top, queue.tail.top);
+assert.equal(queue.head.bottom, queue.tail.bottom);
+
+assert.equal(queue.head.top, 10);
+assert.equal(queue.head.bottom, 0);
+
+queue.shift();
+
+assert.equal(queue.head.top, queue.tail.top);
+assert.equal(queue.head.bottom, queue.tail.bottom);
+
+assert.equal(queue.head.top, 10);
+assert.equal(queue.head.bottom, 1);
+
+queue.shift();
+assert.equal(queue.head.bottom, 2);
+
+
+
 
