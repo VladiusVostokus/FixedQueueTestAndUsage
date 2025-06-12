@@ -61,6 +61,17 @@ assert.equal(queue.head.bottom, 1);
 queue.shift();
 assert.equal(queue.head.bottom, 2);
 
+// Add more than 2028(creation of new buffer inside queue)
+queue = new FixedQueue();
+for (let i = 0; i < 2047; i++) {
+  queue.push(i);
+}
+
+assert.equal(queue.head.top, 2047);
+assert.equal(queue.head.bottom, 0);
+
+queue.push(12312);
+assert.equal(queue.head.top, 1);
 
 
 
