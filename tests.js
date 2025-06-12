@@ -3,6 +3,8 @@
 const assert = require('assert');
 const FixedQueue = require('./fixedQueue');
 
+const kSize = 2047;
+
 // Simple correct usage
 {
   const queue = new FixedQueue();
@@ -68,11 +70,11 @@ const FixedQueue = require('./fixedQueue');
 // Add more than 2028(creation of new buffer inside queue)
 {
   const queue = new FixedQueue();
-  for (let i = 0; i < 2047; i++) {
+  for (let i = 0; i < kSize; i++) {
     queue.push(i);
   }
 
-  assert.equal(queue.head.top, 2047);
+  assert.equal(queue.head.top, kSize);
   assert.equal(queue.tail.bottom, 0);
 
   queue.push(12312);
@@ -98,21 +100,21 @@ const FixedQueue = require('./fixedQueue');
 {
   const queue = new FixedQueue();
 
-  for (let i = 0; i < 2047; i++) {
+  for (let i = 0; i < kSize; i++) {
     queue.push(i);
   }
 
   queue.shift();
   assert.equal(queue.tail.bottom, 1);
 
-  for (let i = 0; i < 2046; i++) {
+  for (let i = 0; i < kSize - 1; i++) {
     queue.shift();
   }
 
-  assert.equal(queue.tail.bottom, 2047);
+  assert.equal(queue.tail.bottom, kSize);
   queue.shift();
   queue.shift();
-  assert.equal(queue.tail.bottom, 2047);
+  assert.equal(queue.tail.bottom, kSize);
 }
 
 
@@ -123,16 +125,16 @@ const FixedQueue = require('./fixedQueue');
   for (let i = 0; i < 5000; i++) {
     queue.push(i);
   }
-
-  assert.equal(queue.head.top, 5000 - 2047 * 2);
+  
+  assert.equal(queue.head.top, 5000 - kSize * 2);
 
   for (let i = 0; i < 4999; i++) {
     queue.shift();
   }
 
-  assert.equal(queue.tail.bottom, 5000 - 2047 * 2 - 1);
+  assert.equal(queue.tail.bottom, 5000 - kSize * 2 - 1);
   queue.shift();
-  assert.equal(queue.tail.bottom, 5000 - 2047 * 2);
+  assert.equal(queue.tail.bottom, 5000 - kSize * 2);
 }
 
 
