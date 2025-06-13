@@ -33,3 +33,15 @@ for (let i = 0; i < 10000; i++) {
 
 console.log(shiftSum); // 10000
 
+
+const f1 = () => { console.log('f1') };
+const f2 = () => { console.log('f2') };
+const f3 = () => { console.log('f3') };
+
+queue.push(f1);
+queue.push(f2);
+queue.push(f3);
+
+queue.shift()(); // f1
+queue.shift()(); // f2
+queue.shift()(); // f3
