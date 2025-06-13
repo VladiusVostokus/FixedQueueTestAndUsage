@@ -45,3 +45,17 @@ queue.push(f3);
 queue.shift()(); // f1
 queue.shift()(); // f2
 queue.shift()(); // f3
+
+class MyClass {
+  constructor(a) {
+    this.a = a;
+  }
+
+  printA() {
+    console.log(this.a);
+  }
+}
+
+myClass = new MyClass('a');
+queue.push(myClass);
+queue.shift().printA(); // a
